@@ -3,6 +3,8 @@ import { IoSearchOutline } from "react-icons/io5";
 import { IoMdCart } from "react-icons/io";
 import DarkMode from './DarkMode';
 import { FaAngleDown } from "react-icons/fa6";
+import { FaUserCircle } from "react-icons/fa";
+
 const Menu = [
     {
       id: 1,
@@ -16,7 +18,7 @@ const Menu = [
     },
     {
       id: 3,
-      name: "Know our Artiest",
+      name: "Know our Artist",
       link: "/#",
     },
     {
@@ -25,6 +27,23 @@ const Menu = [
       link: "/#",
     },
     
+  ];
+  const DropdownLinks = [
+    {
+      id: 1,
+      name: "Pottery&Ceramics",
+      link: "/#",
+    },
+    {
+      id: 2,
+      name: "Accessories",
+      link: "/#",
+    },
+    {
+      id: 3,
+      name: "Home Decor",
+      link: "/#",
+    },
   ];
 const Navbar = () => {
   return (
@@ -48,9 +67,12 @@ const Navbar = () => {
             </div>
             {/* order button  */}
             <button onClick={()=> alert ("order not avaliable yet")} className='bg-gradient-to-r bg-orange-400 to bg-orange-600 transition-all duration-200 text-white py-1 px-4 rounded-full flex items-center gap-3 group'>
-                <span className='group-hover:block hidden transition-all duration-200'>Order</span>
+                <span className='group-hover:block hidden transition-all duration-200'>Cart</span>
                 <IoMdCart className='text-xl text-white drop-shadow-sm cursor-pointer '/>
             </button>
+            <div>
+            <FaUserCircle className='text-2xl drop-shadow-sm cursor-pointer justify-center'/>
+            </div>
             {/* darkmode Switch */}
             <div>
               <DarkMode />  
@@ -70,12 +92,26 @@ const Navbar = () => {
                 
                 )
             }
-            <li>
+            <li className='group relative cursor-pointer'>
                 <a href="#" className="flex items-center gap-[2px] py-2">Categories
                 <span>
                 <FaAngleDown className="transition-all duration-200 group-hover:rotate-180"/>
                 </span>
                 </a>
+                <div className='absolute z-[9999] hidden group-hover:block w-[200px] rounded-md bg-white p-2 text-black shadow-md'>
+                <ul>
+                {DropdownLinks.map((data) => (
+                  <li key={data.id}>
+                    <a
+                      href={data.link}
+                      className="inline-block w-full rounded-md p-2 hover:bg-orange-300/20 "
+                    >
+                      {data.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+                </div>
             </li>
 
 
