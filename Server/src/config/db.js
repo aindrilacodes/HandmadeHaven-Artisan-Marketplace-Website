@@ -1,5 +1,5 @@
 const mongoose=require('mongoose')
-const {mongodburl}=require('../envstore')
+const {mongodburl}=require('./envstore')
 const colors=require('colors')
 
 const connectDb=async()=>{

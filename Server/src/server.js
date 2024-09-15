@@ -1,6 +1,6 @@
 const app=require('./app');
 const colors = require('colors');
-const {serverport}=require('./envstore');
+const {serverport}=require('./config/envstore');
 const {connectDb}=require('./config/db')
 
 
