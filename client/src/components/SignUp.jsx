@@ -12,7 +12,7 @@ const Signup = () => {
       [name]: value
     }));
   };
-
+// Perform signup logic here
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
