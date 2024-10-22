@@ -7,6 +7,7 @@ import About_Us from './pages/About_Us'
 import KnowOurArtist from './pages/KnowOurArtist'
 import SignUp from './components/SignUp';
 import Cart from './pages/Cart';
+import Login from "./components/Login";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
     <Route path="/knowourartist" element={<KnowOurArtist />}/>
     <Route path="/signup" element={<SignUp/>}/>
     <Route path="/cart" element={<Cart/>}/>
+    <Route path="/cart" element={<Login/>}/>
     </Routes>
  
   </BrowserRouter>

@@ -40,7 +40,7 @@ const Signup = () => {
         alert(data.message); 
       } else {
         alert("Registration successful");
-        navigate('/'); 
+        navigate('/login'); 
       }
 
     } catch (error) {

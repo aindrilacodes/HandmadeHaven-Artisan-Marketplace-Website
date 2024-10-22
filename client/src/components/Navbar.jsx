@@ -76,13 +76,13 @@ const Navbar = () => {
             <li className='hover:text-orange-500 cursor-pointer'>Home</li>
           </Link>
           <Link to='/blog'>
-            <li className='px-4 hover:underline'>Blog</li>
+            <li className='hover:text-orange-500 cursor-pointer'>Blog</li>
           </Link>
           <Link to='/about-us'>
-            <li className='px-4 hover:underline'>About Us</li>
+            <li className='hover:text-orange-500 cursor-pointer'>About Us</li>
           </Link>
           <Link to='/knowourartist'>
-            <li className='px-4 hover:underline'>Know Our Artist</li>
+            <li className='hover:text-orange-500 cursor-pointer'>Know Our Artist</li>
           </Link>
 
           {/* Categories Dropdown */}
