@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { IoSearchOutline } from "react-icons/io5";
 import { IoMdCart } from "react-icons/io";
 import { Link } from 'react-router-dom';
@@ -31,7 +31,7 @@ const Navbar = () => {
       <div className='bg-yellow-100 py-2'>
         <div className='container flex justify-between items-center'>
           <div>
-            <a href="#" className='font-mono text-2xl sm:text-3xl flex gap-2'>
+            <a href="#" className='font-mono text-2xl sm:text-3xl flex gap-2 text-black'>
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkdzik5yqGczSrtwqipPD6mnl7x4JL44LxHg&s" alt="Logo" className='w-10' />
               HandmadeHaven
             </a>
@@ -70,7 +70,7 @@ const Navbar = () => {
       </div>
 
       {/* Lower Navbar */}
-      <div className="flex justify-center">
+      <div className="flex justify-center ">
         <ul className="sm:flex hidden items-center gap-4">
           <Link to='/'>
             <li className='hover:text-orange-500 cursor-pointer'>Home</li>
