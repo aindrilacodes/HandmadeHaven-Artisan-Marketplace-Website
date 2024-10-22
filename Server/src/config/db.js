@@ -2,15 +2,26 @@ const mongoose=require('mongoose')
 const {mongodburl}=require('./envstore')
 const colors=require('colors')
 
-const connectDb=async()=>{
+
+async function connectDb(){
     try{
-const conn=await mongoose.connect(mongodburl)
-console.log(`Database Connected ${conn.connection.host}`.bgGreen.white)
+        if(mongoose.connection.readyState!=1){
+            if (!mongodburl) {
+                throw new Error("MONGO_URI is not defined in the environment variables");
+            }
+            await mongoose.connect(mongodburl);
+            console.log(("Database connected").bgRed.white);
+            console.log((mongoose.connection.host).bgYellow.black);    
+            
+        }
+        else{
+            console.log("Database already connected");
+            
+        }
     }
-    catch(error)
-    {
-        console.log(`Error in Mongodb ${error}`.bgRed.white)
+    catch(error){
+        console.error(error);
+        
     }
 }
-
 module.exports={connectDb};
