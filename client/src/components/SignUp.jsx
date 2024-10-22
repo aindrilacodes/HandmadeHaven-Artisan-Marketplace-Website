@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  });
+  const [formData, setFormData] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,33 +13,39 @@ const Signup = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       alert('Passwords do not match');
-    } else {
-      // Handle the sign-up logic (e.g., send form data to the backend)
-      alert('Sign Up Successful');
-      console.log(formData);
-      try {
-        // Send registration data to the backend
-        const response = await axios.post('http://localhost:5000/api/register', {
-          username,
-          email,
-          password
-        });
-  
-        if (response.data.success) {
-          // If registration is successful, navigate to Profile Setup page
-          navigate('/profile-setup');
-        } else {
-          alert('Registration failed.');
-        }
-      } catch (error) {
-        console.error('Error during registration:', error);
-        alert('An error occurred during registration.');
+      return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:8001/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password
+        }),
+      });
+
+      const data = await res.json();
+      console.log(data);
+
+      if (data.success === false) {
+        alert(data.message); 
+      } else {
+        alert("Registration successful");
+        navigate('/'); 
       }
-    };
+
+    } catch (error) {
+      console.error("Fetch error:", error);
+      alert("An error occurred while trying to register.");
     }
   };
 
