@@ -1,22 +1,54 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: '', password: '' });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // Perform login logic here
-    alert('Login successfull!!');
-  };
+    const [formData, setFormData] = useState({});
+    const navigate = useNavigate();
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value
+      }));
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      if (formData.password !== formData.confirmPassword) {
+        alert('Passwords do not match');
+        return;
+      }
+  
+      try {
+        const res = await fetch("http://localhost:8001/api/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            password: formData.password
+          }),
+        });
+  
+        const data = await res.json();
+        console.log(data);
+  
+        if (data.success === false) {
+          alert(data.message); 
+        } else {
+          alert("login successful");
+          navigate('/'); 
+        }
+  
+      } catch (error) {
+        console.error("Fetch error:", error);
+        alert("An error occurred while trying to login.");
+      }
+    };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
