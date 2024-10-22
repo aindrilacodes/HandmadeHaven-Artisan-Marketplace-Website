@@ -15,19 +15,13 @@ const Login = () => {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      if (formData.password !== formData.confirmPassword) {
-        alert('Passwords do not match');
-        return;
-      }
-  
       try {
-        const res = await fetch("http://localhost:8001/api/auth/register", {
+        const res = await fetch("http://localhost:8001/api/auth/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            name: formData.name,
             email: formData.email,
             password: formData.password
           }),
