@@ -1,6 +1,7 @@
 const mongoose=require('mongoose')
 const {defaultimagepath}=require('../config/envstore')
-const bcrypt=require('bcrypt')
+const {REFRESHTOKENEXPIRY,REFRESHTOKENSECRETKEY,ACCESSTOKENSECRETKEY,ACCESSTOKENEXPIRY}=require("../config/envstore")
+const jwt=require("jsonwebtoken")
 
 const userSchema=new mongoose.Schema({
     name:{
@@ -23,19 +24,37 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:[true,'User password is required'],
         minlength:[8,'minimum size of 8 is required'],
-       // maxlength:[20,'User name exceeded(max-20)'] 
+       
     },
+    refreshToken: String,
     image:{
         type:String,
         default:defaultimagepath , 
     },
     Phone:{
-        type:String,
-        //required:[true,'User phone is required'], 
+        type:String, 
     },
 },{timestamps:true});
 
-
+userSchema.methods.generateAccessToken = function () {
+    console.log("Generating access token for:", this.email);
+    return jwt.sign(
+      {
+        email: this.email
+      },
+      ACCESSTOKENSECRETKEY,
+      { expiresIn: ACCESSTOKENEXPIRY }
+    );
+  };
+  userSchema.methods.generateRefreshToken = function () {
+    return jwt.sign(
+      {
+        email: this.email
+      },
+      REFRESHTOKENSECRETKEY,
+      { expiresIn: REFRESHTOKENEXPIRY }
+    );
+  };
 
 const user=mongoose.model('users',userSchema)
 module.exports=user
