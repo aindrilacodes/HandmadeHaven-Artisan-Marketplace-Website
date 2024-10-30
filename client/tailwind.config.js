@@ -8,7 +8,9 @@ export default {
     extend: {
       fontFamily: {
         dynapuff: ["DynaPuff", "serif"], 
+        Agbalumo: ["Agbalumo", "system-ui"]
       },
+     
     },
   },
   plugins: [],
